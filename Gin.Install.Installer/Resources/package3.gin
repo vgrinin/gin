@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<PackageBody xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PackageId>8a3c3796309b44ce9e8a4f6dcbfe1462</PackageId>
+  <SoftwareName>OSBB.Synchronization</SoftwareName>
+  <Command xsi:type="CommandSequence">
+    <Description>Синхронизация</Description>
+    <ErrorLevel>StopExecution</ErrorLevel>
+    <Commands>
+      <Command xsi:type="UserInputForm">
+        <Description>Выбираем экземпляр OSBB SQL-сервера, и узнаем, где хранятся DTS-пакеты</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <FormCaption>Подключение к БД</FormCaption>
+        <InputControls>
+          <UserInputControl xsi:type="ICOSBBSQLConnection">
+            <ErrorLevel>StopExecution</ErrorLevel>
+            <ResultName>sql_connection</ResultName>
+            <Value xsi:type="SQLOSBBConnectionProperties">
+              <InstanceName>.</InstanceName>
+              <DBName />
+              <SqlAuthentication>true</SqlAuthentication>
+              <UserName>sa</UserName>
+              <Password />
+              <CreateBackup>true</CreateBackup>
+            </Value>
+          </UserInputControl>
+        </InputControls>
+        <AfterComplete xsi:type="CommandSequence">
+          <Description />
+          <ErrorLevel>StopExecution</ErrorLevel>
+          <Commands>
+            <Command xsi:type="CMParseResult">
+              <ErrorLevel>StopExecution</ErrorLevel>
+              <ArgumentName>%sql_connection%</ArgumentName>
+            </Command>
+          </Commands>
+        </AfterComplete>
+        <IsFirst>false</IsFirst>
+        <IsLast>false</IsLast>
+      </Command>
+      <Command xsi:type="CommandSequence">
+        <Description>Собственно процедура синхронизации</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <Commands>
+          <Command xsi:type="CMShowUserInfo">
+            <ErrorLevel>StopExecution</ErrorLevel>
+          </Command>
+          <Command xsi:type="ExecuteIf">
+            <UserInfo>
+              <MessageText>Создание резервной копии БД</MessageText>
+              <MessageGuid>e2e0df790dde4c66846ae46b81ed9199</MessageGuid>
+            </UserInfo>
+            <Description>Создание резервной копии БД</Description>
+            <ErrorLevel>StopExecution</ErrorLevel>
+            <ArgumentName>%sql_connection.CreateBackup%</ArgumentName>
+            <Then xsi:type="CommandSequence">
+              <ErrorLevel>StopExecution</ErrorLevel>
+              <Commands>
+                <Command xsi:type="CMCreateSQLBackup">
+                  <UserInfo>
+                    <MessageText />
+                    <MessageGuid>96393e394f65448b9baa9748f30d813f</MessageGuid>
+                  </UserInfo>
+                  <ErrorLevel>StopExecution</ErrorLevel>
+                  <ConnectionString>%sql_connection.ConnectionString%</ConnectionString>
+                  <DatabaseName>%sql_connection.DBName%</DatabaseName>
+                  <BackupFilePath>%sql_connection.BackupFilePath%</BackupFilePath>
+                  <CommandTimeout>3600</CommandTimeout>
+                </Command>
+              </Commands>
+            </Then>
+          </Command>
+          <Command xsi:type="CMSynchronize">
+            <UserInfo>
+              <MessageText>Синхронизация 29 альбома</MessageText>
+              <MessageGuid>8e940535baf647818f34e9f7d99b6742</MessageGuid>
+            </UserInfo>
+            <Description>29 альбом</Description>
+            <ErrorLevel>StopExecution</ErrorLevel>
+            <ConnectionString>%sql_connection.ConnectionString%</ConnectionString>
+            <PackagePath>%PACKAGE_SOURCE%\FILES\29</PackagePath>
+            <ConnectionStringEtalon />
+            <SyncType>TextFile</SyncType>
+            <LoadPick xsi:type="xsd:boolean">false</LoadPick>
+            <LoadHierarchy xsi:type="xsd:boolean">false</LoadHierarchy>
+            <UpdateDisplayCode xsi:type="xsd:boolean">false</UpdateDisplayCode>
+            <CheckFormulaDiapasons xsi:type="xsd:boolean">true</CheckFormulaDiapasons>
+            <UpdateSetStrings xsi:type="xsd:boolean">false</UpdateSetStrings>
+            <ContentPath>%PACKAGE_SOURCE%\FILES\29</ContentPath>
+          </Command>
+          <Command xsi:type="CMSynchronize">
+            <UserInfo>
+              <MessageText>Синхронизация 30 альбома</MessageText>
+              <MessageGuid>5f2e4489ef9d4301ae94e6eb9789cf5f</MessageGuid>
+            </UserInfo>
+            <Description>30 альбом</Description>
+            <ErrorLevel>StopExecution</ErrorLevel>
+            <ConnectionString>%sql_connection.ConnectionString%</ConnectionString>
+            <PackagePath>%PACKAGE_SOURCE%\FILES\30</PackagePath>
+            <SyncType>TextFile</SyncType>
+            <LoadPick xsi:type="xsd:boolean">false</LoadPick>
+            <LoadHierarchy xsi:type="xsd:boolean">false</LoadHierarchy>
+            <UpdateDisplayCode xsi:type="xsd:boolean">false</UpdateDisplayCode>
+            <CheckFormulaDiapasons xsi:type="xsd:boolean">true</CheckFormulaDiapasons>
+            <UpdateSetStrings xsi:type="xsd:boolean">false</UpdateSetStrings>
+            <ContentPath>%PACKAGE_SOURCE%\FILES\30</ContentPath>
+          </Command>
+          <Command xsi:type="CMImportSets">
+            <UserInfo>
+              <MessageText>Импорт связок БР_Расходы</MessageText>
+              <MessageGuid>cee0d8a3784b4dbebc7920f0a1344d40</MessageGuid>
+            </UserInfo>
+            <Description>БР_Расходы</Description>
+            <ErrorLevel>StopExecution</ErrorLevel>
+            <ConnectionString>%sql_connection.ConnectionString%</ConnectionString>
+            <ExcelFilePath>%PACKAGE_SOURCE%\EXCEL\БР_Расходы.xls</ExcelFilePath>
+            <WorksheetName>1</WorksheetName>
+            <StartRowNumber xsi:type="xsd:int">5</StartRowNumber>
+            <EndRowNumber xsi:type="xsd:int">6</EndRowNumber>
+            <IgnoreDuplicates xsi:type="xsd:boolean">true</IgnoreDuplicates>
+            <NSIVersion xsi:type="xsd:int">2</NSIVersion>
+            <DeletePreviousSets xsi:type="xsd:boolean">true</DeletePreviousSets>
+            <SetName>БР_Расходы</SetName>
+            <Secret>Auto</Secret>
+            <ImportSetType>Budget</ImportSetType>
+            <ContentPath>%PACKAGE_SOURCE%\EXCEL\БР_Расходы.xls</ContentPath>
+          </Command>
+          <Command xsi:type="CMExecuteSQLNonQuery">
+            <UserInfo>
+              <MessageText>Выполнение BuildFormulas.sql</MessageText>
+              <MessageGuid>6a6b594e3ea8466e9a48c168f4ddcf11</MessageGuid>
+            </UserInfo>
+            <Description>BuildFormulas.sql</Description>
+            <ErrorLevel>StopExecution</ErrorLevel>
+            <ConnectionString>%sql_connection.ConnectionString%</ConnectionString>
+            <CommandType>Text</CommandType>
+            <ScriptFilePath>%PACKAGE_SOURCE%\SCRIPTS\BuildFormulas.sql</ScriptFilePath>
+            <CommandTimeout>3600</CommandTimeout>
+            <Parameters />
+            <ResultName>sql_dummy_result</ResultName>
+            <ResultType>Int</ResultType>
+            <ResultSize>0</ResultSize>
+            <ContentPath>%PACKAGE_SOURCE%\SCRIPTS\BuildFormulas.sql</ContentPath>
+          </Command>
+          <Command xsi:type="CMExecuteSQLNonQuery">
+            <UserInfo>
+              <MessageText>Выполнение DEL_ModelFilterItems.sql</MessageText>
+              <MessageGuid>3bb987086a8c41be8a168fb4f8de3150</MessageGuid>
+            </UserInfo>
+            <Description>DEL_ModelFilterItems.sql</Description>
+            <ErrorLevel>StopExecution</ErrorLevel>
+            <ConnectionString>%sql_connection.ConnectionString%</ConnectionString>
+            <CommandType>Text</CommandType>
+            <ScriptFilePath>%PACKAGE_SOURCE%\SCRIPTS\DEL_ModelFilterItems.sql</ScriptFilePath>
+            <CommandTimeout>3600</CommandTimeout>
+            <Parameters />
+            <ResultName>sql_dummy_result</ResultName>
+            <ResultType>Int</ResultType>
+            <ResultSize>0</ResultSize>
+            <ContentPath>%PACKAGE_SOURCE%\SCRIPTS\DEL_ModelFilterItems.sql</ContentPath>
+          </Command>
+          <Command xsi:type="CMExecuteSQLNonQuery">
+            <UserInfo>
+              <MessageText>Выполнение Replace_ObjectCode.sql</MessageText>
+              <MessageGuid>0b8ff3e5f88245fea3d01bb3973fa476</MessageGuid>
+            </UserInfo>
+            <Description>Replace_ObjectCode.sql</Description>
+            <ErrorLevel>StopExecution</ErrorLevel>
+            <ConnectionString>%sql_connection.ConnectionString%</ConnectionString>
+            <CommandType>Text</CommandType>
+            <ScriptFilePath>%PACKAGE_SOURCE%\SCRIPTS\Replace_ObjectCode.sql</ScriptFilePath>
+            <CommandTimeout>3600</CommandTimeout>
+            <Parameters />
+            <ResultName>sql_dummy_result</ResultName>
+            <ResultType>Int</ResultType>
+            <ResultSize>0</ResultSize>
+            <ContentPath>%PACKAGE_SOURCE%\SCRIPTS\Replace_ObjectCode.sql</ContentPath>
+          </Command>
+          <Command xsi:type="CMExecuteSQLNonQuery">
+            <UserInfo>
+              <MessageText>Выполнение Update_OuterConrol.sql</MessageText>
+              <MessageGuid>c155eda7792244a4aa616b7b4b61e927</MessageGuid>
+            </UserInfo>
+            <Description>Update_OuterConrol.sql</Description>
+            <ErrorLevel>StopExecution</ErrorLevel>
+            <ConnectionString>%sql_connection.ConnectionString%</ConnectionString>
+            <CommandType>Text</CommandType>
+            <ScriptFilePath>%PACKAGE_SOURCE%\SCRIPTS\Update_OuterConrol.sql</ScriptFilePath>
+            <CommandTimeout>3600</CommandTimeout>
+            <Parameters />
+            <ResultName>sql_dummy_result</ResultName>
+            <ResultType>Int</ResultType>
+            <ResultSize>0</ResultSize>
+            <ContentPath>%PACKAGE_SOURCE%\SCRIPTS\Update_OuterConrol.sql</ContentPath>
+          </Command>
+        </Commands>
+      </Command>
+    </Commands>
+  </Command>
+  <Width>475</Width>
+  <Height>300</Height>
+  <PackageName>Синхронизация и импорт связок</PackageName>
+  <IncludedPath>D:\Пакеты обновлений\Пакет обновления</IncludedPath>
+  <ContentType>Empty</ContentType>
+</PackageBody>

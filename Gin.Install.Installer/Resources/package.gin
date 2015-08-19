@@ -1,0 +1,322 @@
+<?xml version="1.0"?>
+<PackageBody xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PackageId>6263c18b04fa4b4097a6ee5e7809983b</PackageId>
+  <SoftwareName>Gin.Install.Installer</SoftwareName>
+  <Command xsi:type="CommandSequence">
+    <ErrorLevel>StopExecution</ErrorLevel>
+    <Commands>
+      <Command xsi:type="UserInputForm">
+        <Description>Местоположение файлов</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <FormCaption>Местоположение файлов</FormCaption>
+        <InputControls>
+          <UserInputControl xsi:type="UserInputBrowseDirectoryDialog">
+            <Description>Папка для установки</Description>
+            <ErrorLevel>StopExecution</ErrorLevel>
+            <ResultName>install_dir</ResultName>
+            <Value xsi:type="xsd:string">%gin_files%</Value>
+            <Caption>Папка для установки</Caption>
+          </UserInputControl>
+          <UserInputControl xsi:type="UserInputCheckBox">
+            <Description>Установить построитель пакетов</Description>
+            <ErrorLevel>StopExecution</ErrorLevel>
+            <ResultName>need_builder</ResultName>
+            <Caption>Установить построитель пакетов</Caption>
+          </UserInputControl>
+        </InputControls>
+        <BeforeCreate xsi:type="CommandSequence">
+          <ErrorLevel>StopExecution</ErrorLevel>
+          <Commands>
+            <Command xsi:type="ReadEnvironment">
+              <Description>Читаем путь к папке Program Files</Description>
+              <ErrorLevel>StopExecution</ErrorLevel>
+              <VariableName>ProgramFiles</VariableName>
+              <ResultName>program_files</ResultName>
+            </Command>
+            <Command xsi:type="SaveString">
+              <ErrorLevel>StopExecution</ErrorLevel>
+              <ResultName>gin_files</ResultName>
+              <Value>%program_files%\Gin\</Value>
+              <IsPathCombine>true</IsPathCombine>
+            </Command>
+          </Commands>
+        </BeforeCreate>
+        <IsFirst>false</IsFirst>
+        <IsLast>false</IsLast>
+      </Command>
+      <Command xsi:type="CreateFolder">
+        <Description>Папка инсталлятора</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <DestPath>%install_dir%</DestPath>
+        <CreateEmpty>false</CreateEmpty>
+      </Command>
+      <Command xsi:type="SaveString">
+        <Description>Папка Plugins</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <ResultName>gin_plugins</ResultName>
+        <Value>%install_dir%\Plugins\</Value>
+        <IsPathCombine>true</IsPathCombine>
+      </Command>
+      <Command xsi:type="CreateFolder">
+        <Description>Папка Plugins</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <DestPath>%gin_plugins%</DestPath>
+        <CreateEmpty>false</CreateEmpty>
+      </Command>
+      <Command xsi:type="SaveString">
+        <Description>Avicomp.Installer.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <ResultName>gin_plugins_avicomp</ResultName>
+        <Value>%gin_plugins%\Avicomp.Installer.dll</Value>
+        <IsPathCombine>true</IsPathCombine>
+      </Command>
+      <Command xsi:type="CreateFile">
+        <Description>Avicomp.Installer.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <SourcePath>%GIN_EXE%\Avicomp.Installer.dll</SourcePath>
+        <DestPath>%gin_plugins_avicomp%</DestPath>
+      </Command>
+      <Command xsi:type="SaveString">
+        <Description>Gin.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <ResultName>gin_dll</ResultName>
+        <Value>%install_dir%\Gin.dll</Value>
+        <IsPathCombine>true</IsPathCombine>
+      </Command>
+      <Command xsi:type="CreateFile">
+        <Description>Gin.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <SourcePath>%GIN_EXE%\Gin.dll</SourcePath>
+        <DestPath>%gin_dll%</DestPath>
+      </Command>
+      <Command xsi:type="SaveString">
+        <Description>FlexCel.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <ResultName>flexcel</ResultName>
+        <Value>%install_dir%\FlexCel.dll</Value>
+        <IsPathCombine>true</IsPathCombine>
+      </Command>
+      <Command xsi:type="CreateFile">
+        <Description>FlexCel.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <SourcePath>%GIN_EXE%\FlexCel.dll</SourcePath>
+        <DestPath>%flexcel%</DestPath>
+      </Command>
+      <Command xsi:type="SaveString">
+        <Description>Gin.Installer.exe</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <ResultName>gin_installer_exe</ResultName>
+        <Value>%install_dir%\Gin.Installer.exe</Value>
+        <IsPathCombine>true</IsPathCombine>
+      </Command>
+      <Command xsi:type="CreateFile">
+        <Description>Gin.Installer.exe</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <SourcePath>%GIN_EXE%\Gin.Installer.exe</SourcePath>
+        <DestPath>%gin_installer_exe%</DestPath>
+      </Command>
+      <Command xsi:type="SaveString">
+        <Description>Путь к Gin.Installer.exe.config</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <ResultName>gin_installer_exe_config</ResultName>
+        <Value>%install_dir%\Gin.Installer.exe.config</Value>
+        <IsPathCombine>true</IsPathCombine>
+      </Command>
+      <Command xsi:type="SaveString">
+        <Description>Путь к execution.log</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <ResultName>log_path</ResultName>
+        <Value>%install_dir%\execution.log</Value>
+        <IsPathCombine>true</IsPathCombine>
+      </Command>
+      <Command xsi:type="CreateTextFile">
+        <Description>Подстановки в Gin.Installer.exe.config.tpl</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <SourceFilePath>%GIN_EXE%\Gin.Installer.exe.config.tpl</SourceFilePath>
+        <Substitutes>
+          <StringSubstitute>
+            <Key>{ROOT_PATH}</Key>
+            <Value>%install_dir%</Value>
+          </StringSubstitute>
+          <StringSubstitute>
+            <Key>{LOG_PATH}</Key>
+            <Value>%log_path%</Value>
+          </StringSubstitute>
+        </Substitutes>
+        <DestFilePath>%gin_installer_exe_config%</DestFilePath>
+        <ContentPath>%GIN_EXE%\Gin.Installer.exe.config.tpl</ContentPath>
+      </Command>
+      <Command xsi:type="SaveString">
+        <Description>Путь к Avicomp.Common.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <ResultName>avicomp_common_dll</ResultName>
+        <Value>%install_dir%\Avicomp.Common.dll</Value>
+        <IsPathCombine>true</IsPathCombine>
+      </Command>
+      <Command xsi:type="CreateFile">
+        <Description>Avicomp.Common.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <SourcePath>%GIN_EXE%\Avicomp.Common.dll</SourcePath>
+        <DestPath>%avicomp_common_dll%</DestPath>
+      </Command>
+      <Command xsi:type="SaveString">
+        <Description>Путь к Interop.DTS.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <ResultName>interop_dts_dll</ResultName>
+        <Value>%install_dir%\Interop.DTS.dll</Value>
+        <IsPathCombine>true</IsPathCombine>
+      </Command>
+      <Command xsi:type="CreateFile">
+        <Description>Interop.DTS.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <SourcePath>%GIN_EXE%\Interop.DTS.dll</SourcePath>
+        <DestPath>%interop_dts_dll%</DestPath>
+      </Command>
+      <Command xsi:type="SaveString">
+        <Description>Путь к Interop.IWshRuntimeLibrary.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <ResultName>wsh_dll</ResultName>
+        <Value>%install_dir%\Interop.IWshRuntimeLibrary.dll</Value>
+        <IsPathCombine>true</IsPathCombine>
+      </Command>
+      <Command xsi:type="CreateFile">
+        <Description>Interop.IWshRuntimeLibrary.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <SourcePath>%GIN_EXE%\Interop.IWshRuntimeLibrary.dll</SourcePath>
+        <DestPath>%wsh_dll%</DestPath>
+      </Command>
+      <Command xsi:type="SaveString">
+        <Description>Путь к Microsoft.Office.Interop.Excel.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <ResultName>interop_excel_dll</ResultName>
+        <Value>%install_dir%\Microsoft.Office.Interop.Excel.dll</Value>
+        <IsPathCombine>true</IsPathCombine>
+      </Command>
+      <Command xsi:type="CreateFile">
+        <Description>Microsoft.Office.Interop.Excel.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <SourcePath>%GIN_EXE%\Microsoft.Office.Interop.Excel.dll</SourcePath>
+        <DestPath>%interop_excel_dll%</DestPath>
+      </Command>
+      <Command xsi:type="SaveString">
+        <Description>Путь к Microsoft.Vbe.Interop.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <ResultName>interop_vbe_dll</ResultName>
+        <Value>%install_dir%\Microsoft.Vbe.Interop.dll</Value>
+        <IsPathCombine>true</IsPathCombine>
+      </Command>
+      <Command xsi:type="CreateFile">
+        <Description>Microsoft.Vbe.Interop.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <SourcePath>%GIN_EXE%\Microsoft.Vbe.Interop.dll</SourcePath>
+        <DestPath>%interop_vbe_dll%</DestPath>
+      </Command>
+      <Command xsi:type="SaveString">
+        <Description>Путь к FlexCelWinforms.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <ResultName>fcell_wf_dll</ResultName>
+        <Value>%install_dir%\FlexCelWinforms.dll</Value>
+        <IsPathCombine>true</IsPathCombine>
+      </Command>
+      <Command xsi:type="CreateFile">
+        <Description>FlexCelWinforms.dll</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <SourcePath>%GIN_EXE%\FlexCelWinforms.dll</SourcePath>
+        <DestPath>%fcell_wf_dll%</DestPath>
+      </Command>
+      <Command xsi:type="CreateShortcut">
+        <Description>Инсталлятор Gin</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <FilePath>%gin_installer_exe%</FilePath>
+        <ShortcutName>Инсталлятор Gin</ShortcutName>
+        <Place>Desktop</Place>
+        <AllUsers xsi:type="xsd:boolean">true</AllUsers>
+      </Command>
+      <Command xsi:type="ExecuteIf">
+        <Description>нужно ставить построитель пакетов</Description>
+        <ErrorLevel>StopExecution</ErrorLevel>
+        <ArgumentName>%need_builder%</ArgumentName>
+        <Then xsi:type="CommandSequence">
+          <ErrorLevel>StopExecution</ErrorLevel>
+          <Commands>
+            <Command xsi:type="SaveString">
+              <Description>Путь к Gin.Builder.exe.config</Description>
+              <ErrorLevel>StopExecution</ErrorLevel>
+              <ResultName>gin_builder_exe_config</ResultName>
+              <Value>%install_dir%\Gin.Builder.exe.config</Value>
+              <IsPathCombine>true</IsPathCombine>
+            </Command>
+            <Command xsi:type="CreateTextFile">
+              <Description>Подстановки в Gin.Builder.exe.config.tpl</Description>
+              <ErrorLevel>StopExecution</ErrorLevel>
+              <SourceFilePath>%GIN_EXE%\Gin.Builder.exe.config.tpl</SourceFilePath>
+              <Substitutes>
+                <StringSubstitute>
+                  <Key>{ROOT_PATH}</Key>
+                  <Value>%install_dir%</Value>
+                </StringSubstitute>
+                <StringSubstitute>
+                  <Key>{LOG_PATH}</Key>
+                  <Value>%log_path%</Value>
+                </StringSubstitute>
+              </Substitutes>
+              <DestFilePath>%gin_builder_exe_config%</DestFilePath>
+              <ContentPath>%GIN_EXE%\Gin.Builder.exe.config.tpl</ContentPath>
+            </Command>
+            <Command xsi:type="SaveString">
+              <Description>Путь к Gin.Builder.exe</Description>
+              <ErrorLevel>StopExecution</ErrorLevel>
+              <ResultName>gin_builder</ResultName>
+              <Value>%install_dir%\Gin.Builder.exe</Value>
+              <IsPathCombine>true</IsPathCombine>
+            </Command>
+            <Command xsi:type="CreateFile">
+              <Description>Gin.Builder.exe</Description>
+              <ErrorLevel>StopExecution</ErrorLevel>
+              <SourcePath>%GIN_EXE%\Gin.Builder.exe</SourcePath>
+              <DestPath>%gin_builder%</DestPath>
+            </Command>
+            <Command xsi:type="SaveString">
+              <Description>Путь к папке \Шаблоны\</Description>
+              <ErrorLevel>StopExecution</ErrorLevel>
+              <ResultName>gin_templates</ResultName>
+              <Value>%install_dir%\Шаблоны\</Value>
+              <IsPathCombine>true</IsPathCombine>
+            </Command>
+            <Command xsi:type="CreateDirectoryContent">
+              <Description>Шаблоны</Description>
+              <ErrorLevel>StopExecution</ErrorLevel>
+              <SourcePath>%GIN_EXE%\templates</SourcePath>
+              <DestPath>%gin_templates%</DestPath>
+            </Command>
+            <Command xsi:type="SaveString">
+              <Description>Путь к папке packages</Description>
+              <ErrorLevel>StopExecution</ErrorLevel>
+              <ResultName>builder_packages</ResultName>
+              <Value>%install_dir%\packages</Value>
+              <IsPathCombine>true</IsPathCombine>
+            </Command>
+            <Command xsi:type="CreateFolder">
+              <Description>packages</Description>
+              <ErrorLevel>StopExecution</ErrorLevel>
+              <DestPath>%builder_packages%</DestPath>
+              <CreateEmpty>false</CreateEmpty>
+            </Command>
+            <Command xsi:type="CreateShortcut">
+              <Description>Построитель пакетов Gin</Description>
+              <ErrorLevel>StopExecution</ErrorLevel>
+              <FilePath>%gin_builder%</FilePath>
+              <ShortcutName>Построитель пакетов Gin</ShortcutName>
+              <Place>Desktop</Place>
+              <AllUsers xsi:type="xsd:boolean">true</AllUsers>
+            </Command>
+          </Commands>
+        </Then>
+      </Command>
+    </Commands>
+  </Command>
+  <Width>475</Width>
+  <Height>300</Height>
+  <PackageName>Gin.Installer.Installer</PackageName>
+  <ContentType>Empty</ContentType>
+</PackageBody>

@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>FlexCelWinforms</name>
+  </assembly>
+  <members>
+    <member name="T:FlexCel.Winforms.FlexCelPreview">
+      <summary>
+            A Simple replacement for PrintPreviewControl that allows you to preview even if the user has no
+            printers installed. View the demo on Custom Preview to see how it is used.
+            </summary>
+    </member>
+    <member name="M:FlexCel.Winforms.FlexCelPreview.#ctor">
+      <summary>
+            Creates a new instance of FlexCelPreview.
+            </summary>
+    </member>
+    <member name="P:FlexCel.Winforms.FlexCelPreview.CacheSize">
+      <summary>
+            The cache size in number of pages stored at 100% zoom. For larger zoom
+            actual number of pages is decreased by (Zoom*Zoom)
+            </summary>
+    </member>
+    <member name="P:FlexCel.Winforms.FlexCelPreview.CenteredPreview">
+      <summary>
+            When true, the preview will be drawn at the middle of the window, instead of at the left. If true, then <see cref="P:FlexCel.Winforms.FlexCelPreview.PageXSeparation" /> is the minimum margin that the preview will have.
+            </summary>
+    </member>
+    <member name="M:FlexCel.Winforms.FlexCelPreview.Dispose(System.Boolean)">
+      <summary>
+            Clean up any resources being used.
+            </summary>
+    </member>
+    <member name="P:FlexCel.Winforms.FlexCelPreview.Document">
+      <summary>
+            Document to be Previewed.
+            </summary>
+    </member>
+    <member name="P:FlexCel.Winforms.FlexCelPreview.InterpolationMode">
+      <summary>
+            This affects how the images are rendered on the screen. Some modes will look a little blurred but with better quality.
+            Consult the .NET framework documentation on SmoothingMode for more information
+            </summary>
+    </member>
+    <member name="M:FlexCel.Winforms.FlexCelPreview.InvalidatePreview">
+      <summary>
+            Invalidates the preview and forces the control to reload from the document. 
+            When the control is a Thumbnail you cannot Invalidate it, this will be done automatically when you invalidate the main view.
+            </summary>
+    </member>
+    <member name="M:FlexCel.Winforms.FlexCelPreview.OnFontChanged(System.EventArgs)">
+      <summary>
+            Overrides the OnfontChanged event.
+            </summary>
+      <param name="e"></param>
+    </member>
+    <member name="M:FlexCel.Winforms.FlexCelPreview.OnMouseDown(System.Windows.Forms.MouseEventArgs)">
+      <summary>
+            Overrides the standard mousedown event to handle it.
+            </summary>
+      <param name="e"></param>
+    </member>
+    <member name="M:FlexCel.Winforms.FlexCelPreview.OnPaint(System.Windows.Forms.PaintEventArgs)">
+      <summary>
+            Overrides the OnPaint event.
+            </summary>
+      <param name="pe"></param>
+    </member>
+    <member name="M:FlexCel.Winforms.FlexCelPreview.OnResize(System.EventArgs)">
+      <summary>
+            Overrides de OnResize method.
+            </summary>
+      <param name="e"></param>
+    </member>
+    <member name="M:FlexCel.Winforms.FlexCelPreview.OnStartPageChanged(System.EventArgs)">
+      <summary>
+            Replace this event when creating a custom descendant of FlexCelPreview.
+            </summary>
+      <param name="e"></param>
+    </member>
+    <member name="M:FlexCel.Winforms.FlexCelPreview.OnZoomChanged(System.EventArgs)">
+      <summary>
+            Replace this event when creating a custom descendant of FlexCelPreview.
+            </summary>
+      <param name="e"></param>
+    </member>
+    <member name="P:FlexCel.Winforms.FlexCelPreview.PageXSeparation">
+      <summary>
+            Separation (in display units) between a page an the next. Note that if <see cref="P:FlexCel.Winforms.FlexCelPreview.CenteredPreview" /> is true and the preview window is bigger than the page being displayed, this value has no effect.
+            </summary>
+    </member>
+    <member name="P:FlexCel.Winforms.FlexCelPreview.PageYSeparation">
+      <summary>
+            Separation (in display units) between a page an the next.
+            </summary>
+    </member>
+    <member name="M:FlexCel.Winforms.FlexCelPreview.ProcessCmdKey(System.Windows.Forms.Message@,System.Windows.Forms.Keys)">
+      <summary>
+            Overrides the ProcessCmdKey event.
+            </summary>
+      <param name="msg"></param>
+      <param name="keyData"></param>
+      <returns></returns>
+    </member>
+    <member name="P:FlexCel.Winforms.FlexCelPreview.SmoothingMode">
+      <summary>
+            This affects how the images are rendered on the screen. Some modes will look a little blurred but with better quality.
+            Consult the .NET framework documentation on SmoothingMode for more information
+            </summary>
+    </member>
+    <member name="P:FlexCel.Winforms.FlexCelPreview.StartPage">
+      <summary>
+            Page the preview is showing.
+            </summary>
+    </member>
+    <member name="E:FlexCel.Winforms.FlexCelPreview.StartPageChanged">
+      <summary>
+            Fires when the starting page changes.
+            </summary>
+    </member>
+    <member name="P:FlexCel.Winforms.FlexCelPreview.ThumbnailLarge">
+      <summary>
+            When using this component on Thumbnail mode, set this property to another FlexCelPreview component that
+            will hold the large Thumbnail images.
+            </summary>
+    </member>
+    <member name="P:FlexCel.Winforms.FlexCelPreview.ThumbnailSmall">
+      <summary>
+            When using this component on Thumbnail mode, set this property to another FlexCelPreview component that
+            will hold the small Thumbnail images.
+            </summary>
+    </member>
+    <member name="P:FlexCel.Winforms.FlexCelPreview.TotalPages">
+      <summary>
+            Number of pages displaying.
+            </summary>
+    </member>
+    <member name="P:FlexCel.Winforms.FlexCelPreview.Zoom">
+      <summary>
+            Zoom preview.
+            </summary>
+    </member>
+    <member name="E:FlexCel.Winforms.FlexCelPreview.ZoomChanged">
+      <summary>
+            Fires when the Zoom changes. (for example, the user uses ctrl+MouseWeel).
+            </summary>
+    </member>
+  </members>
+</doc>

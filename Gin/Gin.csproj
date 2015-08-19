@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CBCD0B46-DF60-4DDE-A97D-3D0076D4AFAA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gin</RootNamespace>
+    <AssemblyName>Gin</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>KeyFile.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\CommandResultKind.cs" />
+    <Compile Include="Attributes\Delegates.cs" />
+    <Compile Include="Attributes\GinIncludeTypeAttributes.cs" />
+    <Compile Include="Attributes\GinArgumentComplexValueAttribute.cs" />
+    <Compile Include="Attributes\GinArgumentCommandAcceptNotAttribute.cs" />
+    <Compile Include="Attributes\GinArgumentBrowseFolderAttribute.cs" />
+    <Compile Include="Attributes\GinArgumentCommandAcceptOnlyAttribute.cs" />
+    <Compile Include="Attributes\GinArgumentListAttribute.cs" />
+    <Compile Include="Attributes\GinArgumentIntAttribute.cs" />
+    <Compile Include="Attributes\GinArgumentDateTimeAttribute.cs" />
+    <Compile Include="Attributes\GinArgumentEnumAttribute.cs" />
+    <Compile Include="Attributes\GinArgumentCheckBoxAttribute.cs" />
+    <Compile Include="Attributes\GinNameAttribute.cs" />
+    <Compile Include="Attributes\GinArgumentAttribute.cs" />
+    <Compile Include="Attributes\GinResultAttribute.cs" />
+    <Compile Include="Attributes\GinIgnoreTypeAttributes.cs" />
+    <Compile Include="Attributes\GinArgumentTextAttribute.cs" />
+    <Compile Include="Attributes\GinArgumentBrowseFileAttribute.cs" />
+    <Compile Include="Attributes\GinArgumentCommandAttribute.cs" />
+    <Compile Include="Commands\CMParseResult.cs" />
+    <Compile Include="Commands\CMShowUserInfo.cs" />
+    <Compile Include="Commands\CMThreadSleep.cs" />
+    <Compile Include="Commands\LogObject.cs" />
+    <Compile Include="Commands\LogMessage.cs" />
+    <Compile Include="Commands\GetSpecialFolder.cs" />
+    <Compile Include="Commands\MSISearchType.cs" />
+    <Compile Include="Commands\UserInfoEmbedded.cs" />
+    <Compile Include="Commands\WriteRegistry.cs" />
+    <Compile Include="CommandTree\TreeNodeData.cs" />
+    <Compile Include="CommandTree\CommandTreeNode.cs" />
+    <Compile Include="ConnectionStringFilter.cs" />
+    <Compile Include="Context\ExecutionContext.cs" />
+    <Compile Include="Context\IExecutionContext.cs" />
+    <Compile Include="Editors\ArgumentHelpControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editors\ArgumentHelpControl.Designer.cs">
+      <DependentUpon>ArgumentHelpControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editors\ComboBoxItem.cs" />
+    <Compile Include="Editors\SimpleComboBoxEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editors\SimpleComboBoxEditor.Designer.cs">
+      <DependentUpon>SimpleComboBoxEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logging\ExecutionProgressProxy.cs" />
+    <Compile Include="Logging\ExecutionProgressTextFile.cs" />
+    <Compile Include="Logging\ExecutionLoggerMessageBox.cs" />
+    <Compile Include="LogMessageFilter.cs" />
+    <Compile Include="PackageContent\PackageContentPacked.cs" />
+    <Compile Include="Transactions\FileSetStep.cs" />
+    <Compile Include="Util\CancellingExecutor.cs" />
+    <Compile Include="Util\GZip\GZipReader.cs" />
+    <Compile Include="Util\GZip\GZipWriter.cs" />
+    <Compile Include="Util\Win32Util.cs" />
+    <Compile Include="Visitors\CommandVisitor.cs" />
+    <Compile Include="Visitors\CheckPackageVisitor.cs" />
+    <Compile Include="Visitors\ResultInfoVisitor.cs" />
+    <Compile Include="Visitors\UserInfoVisitor.cs" />
+    <Compile Include="Commands\UserInfo.cs" />
+    <Compile Include="Commands\ICanCreateFromFile.cs" />
+    <Compile Include="Commands\SaveBool.cs" />
+    <Compile Include="Commands\SaveDateTime.cs" />
+    <Compile Include="Commands\CreateTextFile.cs" />
+    <Compile Include="Commands\InvertBoolean.cs" />
+    <Compile Include="Commands\IsMSIInstalled.cs" />
+    <Compile Include="Commands\SaveString.cs" />
+    <Compile Include="Commands\TryCatchFinally.cs" />
+    <Compile Include="Commands\CreateDirectoryContent.cs" />
+    <Compile Include="Commands\CreateFolder.cs" />
+    <Compile Include="Commands\CreateShortcut.cs" />
+    <Compile Include="Commands\ExecuteProgram.cs" />
+    <Compile Include="IAdjustableControl.cs" />
+    <Compile Include="SQL\Commands\ExtractFirstRow.cs" />
+    <Compile Include="SQL\Commands\ExtractDataRowField.cs" />
+    <Compile Include="Commands\FormatDateTime.cs" />
+    <Compile Include="Commands\IMultipleContentCommand.cs" />
+    <Compile Include="Commands\IReversibleCommand.cs" />
+    <Compile Include="Commands\IsCOMInstalled.cs" />
+    <Compile Include="Controls\UserControlUtil.cs" />
+    <Compile Include="Controls\UserInputBrowseDirectoryDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\UserInputCheckBox.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\UserInputComboBox.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\UserInputLabel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\UserInputOpenFileDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\UserInputSaveFileDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Editors\CheckBoxEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editors\CheckBoxEditor.Designer.cs">
+      <DependentUpon>CheckBoxEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editors\ComboBoxEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editors\ComboBoxEditor.Designer.cs">
+      <DependentUpon>ComboBoxEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editors\BrowseFileEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editors\BrowseFileEditor.Designer.cs">
+      <DependentUpon>BrowseFileEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editors\BrowseFolderEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editors\BrowseFolderEditor.Designer.cs">
+      <DependentUpon>BrowseFolderEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editors\CheckBoxTemplateEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editors\CheckBoxTemplateEditor.Designer.cs">
+      <DependentUpon>CheckBoxTemplateEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editors\ComplexValueEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editors\ComplexValueEditor.Designer.cs">
+      <DependentUpon>ComplexValueEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editors\EditComplexValueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editors\EditComplexValueForm.Designer.cs">
+      <DependentUpon>EditComplexValueForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editors\FormsHelper.cs" />
+    <Compile Include="Editors\IntEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editors\IntEditor.Designer.cs">
+      <DependentUpon>IntEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editors\DateTimeEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editors\DateTimeEditor.Designer.cs">
+      <DependentUpon>DateTimeEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editors\IEditor.cs" />
+    <Compile Include="Editors\LabelEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editors\LabelEditor.Designer.cs">
+      <DependentUpon>LabelEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editors\ListEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editors\ListEditor.Designer.cs">
+      <DependentUpon>ListEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editors\MultilineTextEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editors\MultilineTextEditor.Designer.cs">
+      <DependentUpon>MultilineTextEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editors\TextEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editors\TextEditor.Designer.cs">
+      <DependentUpon>TextEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IIS\IIS\Exceptions\DirNotFoundException.cs" />
+    <Compile Include="IIS\IIS\Exceptions\FileNotFoundException.cs" />
+    <Compile Include="IIS\IIS\Exceptions\VirtualDirAlreadyExistException.cs" />
+    <Compile Include="IIS\IIS\Exceptions\WebsiteWithoutRootException.cs" />
+    <Compile Include="IIS\IIS\IISAppPool.cs" />
+    <Compile Include="IIS\IIS\IISWebDir.cs" />
+    <Compile Include="IIS\IIS\IISWebsite.cs" />
+    <Compile Include="IIS\IIS\IISWebVirturalDir.cs" />
+    <Compile Include="Logging\ExecutionLoggerUserInfo.cs" />
+    <Compile Include="Logging\Logging.cs" />
+    <Compile Include="PackageContent\PackageContent.cs" />
+    <Compile Include="PackageContent\PackageContentEmpty.cs" />
+    <Compile Include="PackageContent\PackageContentDirect.cs" />
+    <Compile Include="Logging\ExecutionLoggerTextBox.cs" />
+    <Compile Include="Logging\ExecutionProgress.cs" />
+    <Compile Include="GinMetaData.cs" />
+    <Compile Include="Logging\ExecutionProgressConsole.cs" />
+    <Compile Include="Logging\ExecutionProgressWindowsForms.cs" />
+    <Compile Include="GinSerializer.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandSequence.cs" />
+    <Compile Include="Commands\CompareNumbers.cs" />
+    <Compile Include="Commands\CompareStrings.cs" />
+    <Compile Include="Commands\CreateFile.cs" />
+    <Compile Include="Commands\IContainerCommand.cs" />
+    <Compile Include="Commands\IContentCommand.cs" />
+    <Compile Include="Commands\ReadRegistry.cs" />
+    <Compile Include="Commands\ExecuteIf.cs" />
+    <Compile Include="Commands\SaveInt.cs" />
+    <Compile Include="Commands\ShowMessage.cs" />
+    <Compile Include="Commands\ThrowException.cs" />
+    <Compile Include="Commands\TransactionalCommand.cs" />
+    <Compile Include="Commands\TransactionContainer.cs" />
+    <Compile Include="Commands\UserInputForm.cs" />
+    <Compile Include="Commands\CompareNumbersOperand.cs" />
+    <Compile Include="Controls\UserInputControl.cs" />
+    <Compile Include="Controls\UserInputTextBox.cs" />
+    <Compile Include="ExternalCommand.cs" />
+    <Compile Include="Package.cs" />
+    <Compile Include="PackageBody.cs" />
+    <Compile Include="PackageBuilder.cs" />
+    <Compile Include="PackageData.cs" />
+    <Compile Include="Commands\ReadEnvironment.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SQL\Commands\CMCreateSQLBackup.cs" />
+    <Compile Include="SQL\Commands\CMExecuteDTS.cs" />
+    <Compile Include="SQL\Commands\CMExecuteSQLNonQuery.cs" />
+    <Compile Include="SQL\Commands\CMExecuteSQLQuery.cs" />
+    <Compile Include="SQL\Commands\CMExecuteSSIS.cs" />
+    <Compile Include="SQL\Commands\CMInstallSQLInstance.cs" />
+    <Compile Include="SQL\Commands\CMRestoreSQLBackup.cs" />
+    <Compile Include="SQL\DTSGlobalVariable.cs" />
+    <Compile Include="SQL\Controls\ICSQLConnection.cs" />
+    <Compile Include="SQL\Controls\ICSQLInstance.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SQL\Controls\SQLConnectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SQL\Controls\SQLConnectionControl.Designer.cs">
+      <DependentUpon>SQLConnectionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SQL\Controls\SQLInstanceControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SQL\Controls\SQLInstanceControl.Designer.cs">
+      <DependentUpon>SQLInstanceControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SQL\SQLConst.cs" />
+    <Compile Include="SQL\SqlParameterClass.cs" />
+    <Compile Include="SQL\Util\DTSExecutor.cs" />
+    <Compile Include="SQL\Util\SqlCommandProgress.cs" />
+    <Compile Include="SQL\Util\SQLConnectionProperties.cs" />
+    <Compile Include="SQL\Util\SQLUtil.cs" />
+    <Compile Include="Transactions\SingleDirectoryStep.cs" />
+    <Compile Include="Util\IOUtil.cs" />
+    <Compile Include="Util\ProcessWrapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Logging\ExecutionLogger.cs" />
+    <Compile Include="Logging\ExecutionLoggerTextFile.cs" />
+    <Compile Include="Transactions\TransactionExtensions.cs" />
+    <Compile Include="Transactions\Transaction.cs" />
+    <Compile Include="Transactions\TransactionStep.cs" />
+    <Compile Include="Transactions\SingleFileStep.cs" />
+    <Compile Include="WCF\IRemotePackageService.cs" />
+    <Compile Include="WCF\RemotePackage.cs" />
+    <Compile Include="WCF\RemotePackageService.cs" />
+    <Compile Include="WCF\RemotePackageState.cs" />
+    <Compile Include="XmlFileSerializer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Editors\ArgumentHelpControl.resx">
+      <DependentUpon>ArgumentHelpControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editors\CheckBoxEditor.resx">
+      <DependentUpon>CheckBoxEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editors\ComboBoxEditor.resx">
+      <DependentUpon>ComboBoxEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editors\BrowseFileEditor.resx">
+      <DependentUpon>BrowseFileEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editors\BrowseFolderEditor.resx">
+      <DependentUpon>BrowseFolderEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editors\CheckBoxTemplateEditor.resx">
+      <DependentUpon>CheckBoxTemplateEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editors\ComplexValueEditor.resx">
+      <DependentUpon>ComplexValueEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editors\SimpleComboBoxEditor.resx">
+      <DependentUpon>SimpleComboBoxEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editors\EditComplexValueForm.resx">
+      <DependentUpon>EditComplexValueForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editors\IntEditor.resx">
+      <DependentUpon>IntEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editors\DateTimeEditor.resx">
+      <DependentUpon>DateTimeEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editors\LabelEditor.resx">
+      <DependentUpon>LabelEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editors\ListEditor.resx">
+      <DependentUpon>ListEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editors\MultilineTextEditor.resx">
+      <DependentUpon>MultilineTextEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editors\TextEditor.resx">
+      <DependentUpon>TextEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQL\Controls\SQLConnectionControl.resx">
+      <DependentUpon>SQLConnectionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQL\Controls\SQLInstanceControl.resx">
+      <DependentUpon>SQLInstanceControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="KeyFile.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\status6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="DTS">
+      <Guid>{10010001-EB1C-11CF-AE6E-00AA004A34D5}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fault.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\running.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\success.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dismiss .png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
